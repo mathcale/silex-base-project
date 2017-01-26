@@ -1,5 +1,19 @@
 {
+    "name": "mathcale/silex-base-project",
+    "description": "A simple Silex base project with routing, twig templates, database connection and some other cool stuff",
+    "keywords": ["silex","base","bootstrap"],
+    "homepage": "https://github.com/mathcale/silex-base-project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matheus Calegaro",
+            "email": "eu@mathcale.com",
+            "homepage": "https://mathcale.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
+        "php": ">=5.5.9",
         "silex/silex": "^2.0",
         "doctrine/dbal": "~2.2",
         "symfony/security": "~2.8|3.0.*",
