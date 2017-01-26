@@ -13,7 +13,7 @@ A simple Silex base project with routing, twig templates, database connection an
 
 ## Running the app
 
-1. Clone the repo or get from Packagist by running `composer require mathcale/silex-base-project`
+1. Clone the repo or get from Packagist by running `composer create-project --prefer-dist mathcale/silex-base-project`
 2. `cd path/to/repo`
 3. Install the framework dependencies by running `composer install`
 4. Setup your database credentials at `src/bootstrap.php` (if you're using one)
