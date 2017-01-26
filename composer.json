@@ -1,0 +1,15 @@
+{
+    "require": {
+        "silex/silex": "^2.0",
+        "doctrine/dbal": "~2.2",
+        "symfony/security": "~2.8|3.0.*",
+        "twig/twig": "^1.31",
+        "symfony/twig-bridge": "^3.2",
+        "symfony/asset": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "src"
+        }
+    }
+}
