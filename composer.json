@@ -19,11 +19,17 @@
         "symfony/security": "~2.8|3.0.*",
         "twig/twig": "^1.31",
         "symfony/twig-bridge": "^3.2",
-        "symfony/asset": "^3.2"
+        "symfony/asset": "^3.2",
+        "vlucas/phpdotenv": "^2.4"
     },
     "autoload": {
         "psr-4": {
             "MyApp\\": "src"
         }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ]
     }
 }

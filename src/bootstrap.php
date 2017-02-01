@@ -30,16 +30,16 @@ $app->register(new AssetServiceProvider(), array(
 ));
 $app->register(new DoctrineServiceProvider(), array(
     'db.options' => array(
-        'driver'   => 'pdo_mysql',
-        'dbhost'   => '',
-        'dbname'   => '',
-        'user'     => '',
-        'password' => '',
+        'driver'   => getenv('DB_DRIVER'),
+        'dbhost'   => getenv('DB_HOST'),
+        'dbname'   => getenv('DB_NAME'),
+        'user'     => getenv('DB_USER'),
+        'password' => getenv('DB_PASSWORD'),
     ),
 ));
 
-// Application's configs
-$app['debug'] = true;
+// Configs
+$app['debug'] = getenv('APP_DEBUG');
 $app['twig'] = $app->extend('twig', function($twig, $app) {
     return $twig;
 });
