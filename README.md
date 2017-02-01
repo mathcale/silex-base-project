@@ -13,12 +13,11 @@ A simple Silex base project with routing, twig templates, database connection an
 
 ## Running the app
 
-1. Clone the repo or get from Packagist by running `composer create-project --prefer-dist mathcale/silex-base-project`
-2. `cd path/to/repo`
-3. Install the framework dependencies by running `composer install`
-4. Edit the `.env` file with your database connection
-5. Start your web server and go to the project's url
-6. Have fun using Silex!
+1. Clone the repo or get from Packagist by running `composer create-project --prefer-dist mathcale/silex-base-project` on your websever root (e.g. `/var/www/html` ou `C:/wamp/www`)
+2. `cd silex-base-project`
+3. Edit the `.env` file with your database connection
+4. Start your web server and go to the project's url (e.g. `http://localhost/silex-base-project`)
+5. Have fun using Silex!
 
 ## Tips
 * If you want to use npm packages, make sure to update your `.gitignore` with the `node_modules` folder
