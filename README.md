@@ -9,7 +9,7 @@ A simple Silex base project with routing, twig templates, database connection an
 * Composer
 * Apache Web Server
 
-*NOTE*: If you're using another webserver, take a look at the [official documentation](http://silex.sensiolabs.org/doc/2.0/web_servers.html) on how to properly setup it.
+*NOTE*: If you're using another webserver, take a look at the [official documentation](http://silex.sensiolabs.org/doc/2.0/web_servers.html) on how to properly set it up.
 
 ## Running the app
 
