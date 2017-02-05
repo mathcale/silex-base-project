@@ -1,7 +1,7 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
-use MyApp\Controllers\HomeController;
+use App\Controllers\HomeController;
 
 $app->error(function(\Exception $e, Request $request, $code) use($app) {
     switch($code) {

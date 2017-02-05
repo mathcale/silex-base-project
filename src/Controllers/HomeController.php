@@ -1,6 +1,6 @@
 <?php
 
-namespace MyApp\Controllers;
+namespace App\Controllers;
 
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
@@ -12,7 +12,7 @@ class HomeController implements ControllerProviderInterface
     {
         $factory = $app['controllers_factory'];
         
-        $factory->get('/', 'MyApp\Controllers\HomeController::index')->bind('home');
+        $factory->get('/', 'App\Controllers\HomeController::index')->bind('home');
         
         return $factory;
     }
