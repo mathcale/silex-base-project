@@ -1,0 +1,12 @@
+{% extends "auth.html.twig" %}
+
+{% block pageTitle %}Error{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h1>Error</h1>
+        <p>Whoops! There was an error, take a look:</p>
+        <p>{{ message }}</p>
+        <p><a href="{{ path('login') }}">Login</a> | <a href="{{ path('register') }}">Register</a></p>
+    </div>
+{% endblock %}

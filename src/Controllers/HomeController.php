@@ -10,6 +10,12 @@ class HomeController implements ControllerProviderInterface
 
     public function connect(Application $app)
     {
+        $session = $app['session']->get('user');
+    
+        if(is_null($session) || empty($session)) {
+            $app->redirect('/login');
+        }
+        
         $factory = $app['controllers_factory'];
         
         $factory->get('/', 'App\Controllers\HomeController::index')->bind('home');

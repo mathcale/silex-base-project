@@ -5,6 +5,7 @@ use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\RoutingServiceProvider;
+use Silex\Provider\SessionServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 
 $app = new Silex\Application();
@@ -12,6 +13,7 @@ $app = new Silex\Application();
 // Services registration
 $app->register(new TwigServiceProvider());
 $app->register(new RoutingServiceProvider());
+$app->register(new SessionServiceProvider());
 $app->register(new AssetServiceProvider(), array(
     'assets.version' => 'v1',
     'assets.version_format' => '%s?version=%s',
