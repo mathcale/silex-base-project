@@ -13,6 +13,7 @@ class HomeController implements ControllerProviderInterface
         $session = $app['session']->get('user');
     
         if(is_null($session) || empty($session)) {
+            // Should redirect to login, but nothing happens
             $app->redirect('/login');
         }
         
