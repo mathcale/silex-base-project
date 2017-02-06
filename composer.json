@@ -20,7 +20,8 @@
         "twig/twig": "^1.31",
         "symfony/twig-bridge": "^3.2",
         "symfony/asset": "^3.2",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "symfony/console": "^3.2"
     },
     "autoload": {
         "psr-4": {

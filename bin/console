@@ -1,0 +1,76 @@
+#!/usr/bin/env php
+
+<?php
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+set_time_limit(0);
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\ArgvInput;
+
+$input = new ArgvInput();
+$dotenv = new Dotenv\Dotenv(__DIR__.'/../');
+$dotenv->load();
+
+$app = require __DIR__.'/../src/bootstrap.php';
+
+$console = new Application('MyApp');
+$console->setDispatcher($app['dispatcher']);
+$console
+    ->register('make:db')
+    ->setDefinition(array(
+        new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'Database name'),
+    ))
+    ->setDescription('Will create a database structure to match the src/Controllers/AuthController.php queries. Default = silex')
+    ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
+        $finished = false;
+        
+        if(!is_null($input->getOption('name'))) {
+            $dbName = $input->getOption('name');
+        } else {
+            $dbName = 'silex';
+        }
+        
+        $conn = $app['db'];
+        
+        try {
+            $sql = 'CREATE DATABASE '.$dbName;
+            
+            echo 'Creating database "'.$dbName.'"... ';
+            
+            $result = $conn->query($sql);
+            
+            if($result) {
+                echo 'Done!'.PHP_EOL;
+                
+                $sqlTable = 'CREATE TABLE `'.$dbName.'`.`users` (`id` int(7) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, `email` varchar(50) NOT NULL, `password` varchar(15) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1';
+                
+                echo 'Creating table "users"... ';
+                
+                $resultTable = $conn->query($sqlTable);
+                
+                if($resultTable) {
+                    echo 'Done!'.PHP_EOL;
+                    
+                    $finished = true;
+                } else {
+                    throw new Exception('Could not create the table!');
+                }
+            } else {
+                throw new Exception('The database already exists!');
+            }
+        } catch(Exception $e) {
+            echo 'Whoops! There was an error. Here\'s why: '.PHP_EOL;
+            echo $e->getMessage().PHP_EOL;
+        }
+        
+        if($finished) {
+            echo PHP_EOL.'Database structure created successfully!'.PHP_EOL;
+        }
+    });
+$console->run();
