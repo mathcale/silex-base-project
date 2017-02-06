@@ -10,13 +10,6 @@ class HomeController implements ControllerProviderInterface
 
     public function connect(Application $app)
     {
-        $session = $app['session']->get('user');
-    
-        if(is_null($session) || empty($session)) {
-            // Should redirect to login, but nothing happens
-            $app->redirect('/login');
-        }
-        
         $factory = $app['controllers_factory'];
         
         $factory->get('/', 'App\Controllers\HomeController::index')->bind('home');
@@ -26,7 +19,13 @@ class HomeController implements ControllerProviderInterface
     
     public function index(Application $app)
     {
-        return $app['twig']->render('home/index.html.twig', array());
+        $session = $app['session']->get('user');
+    
+        if(is_null($session) || empty($session)) {
+            return $app->redirect($app['url_generator']->generate('login'));
+        } else {
+            return $app['twig']->render('home/index.html.twig', array());
+        }
     }
 
 }
