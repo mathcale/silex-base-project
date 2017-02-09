@@ -42,7 +42,7 @@ class AuthController implements ControllerProviderInterface
     
     public function doLogin(Application $app, Request $request)
     {
-        $db = $app['db'];
+        $db = $app['dbs']['main'];
         $data = $request->request->all();
         $passwd = substr(md5($data['password']), 0, 15);
         
@@ -73,7 +73,7 @@ class AuthController implements ControllerProviderInterface
     
     public function doRegister(Application $app, Request $request)
     {
-        $db = $app['db'];
+        $db = $app['dbs']['main'];
         $data = $request->request->all();
         
         $sql = 'SELECT * FROM users WHERE email = ?';
