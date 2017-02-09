@@ -1,7 +1,7 @@
 Silex Base Project
 ------------------
 
-[![Latest Stable Version](https://poser.pugx.org/mathcale/silex-base-project/v/stable)](https://packagist.org/packages/mathcale/silex-base-project)
+[![Packagist](https://img.shields.io/packagist/v/mathcale/silex-base-project.svg)](https://packagist.org/packages/mathcale/silex-base-project)
 
 A simple Silex 2.x base project with authentication, routing, twig templates, env. variables and some other cool stuff.
 
