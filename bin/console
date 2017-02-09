@@ -1,5 +1,4 @@
 #!/usr/bin/env php
-
 <?php
 
 require_once __DIR__.'/../vendor/autoload.php';
@@ -28,6 +27,9 @@ $console
     ))
     ->setDescription('Will create a database structure to match the src/Controllers/AuthController.php queries. Default = silex')
     ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
+        $output->writeln('<fg=white;bg=cyan>DSG - Database Schema Generator</>');
+        echo PHP_EOL;
+        
         $finished = false;
         
         if(!is_null($input->getOption('name'))) {
@@ -36,26 +38,26 @@ $console
             $dbName = 'silex';
         }
         
-        $conn = $app['db'];
+        $conn = $app['dbs']['console'];
         
         try {
             $sql = 'CREATE DATABASE '.$dbName;
             
-            echo 'Creating database "'.$dbName.'"... ';
+            $output->write('<comment>Creating database "'.$dbName.'"...</comment> ');
             
             $result = $conn->query($sql);
             
             if($result) {
-                echo 'Done!'.PHP_EOL;
+                $output->writeln('<info>Done!</info>');
                 
                 $sqlTable = 'CREATE TABLE `'.$dbName.'`.`users` (`id` int(7) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, `email` varchar(50) NOT NULL, `password` varchar(15) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1';
                 
-                echo 'Creating table "users"... ';
+                $output->write('<comment>Creating table "users"...</comment> ');
                 
                 $resultTable = $conn->query($sqlTable);
                 
                 if($resultTable) {
-                    echo 'Done!'.PHP_EOL;
+                    $output->writeln('<info>Done!</info>');
                     
                     $finished = true;
                 } else {
@@ -65,12 +67,13 @@ $console
                 throw new Exception('The database already exists!');
             }
         } catch(Exception $e) {
-            echo 'Whoops! There was an error. Here\'s why: '.PHP_EOL;
-            echo $e->getMessage().PHP_EOL;
+            $output->writeln('<error>Whoops! There was an error. Here\'s why:</error>');
+            $output->writeln('<error>'.$e->getMessage().'</error>');
         }
         
         if($finished) {
-            echo PHP_EOL.'Database structure created successfully!'.PHP_EOL;
+            echo PHP_EOL;
+            $output->writeln('<info>Database structure created successfully!</info>');
         }
     });
 $console->run();
