@@ -19,9 +19,7 @@ class HomeController implements ControllerProviderInterface
     
     public function index(Application $app)
     {
-        $session = $app['session']->get('user');
-    
-        if(is_null($session) || empty($session)) {
+        if(is_null($app['get_session']) || empty($app['getSession'])) {
             return $app->redirect($app['url_generator']->generate('login'));
         } else {
             return $app['twig']->render('home/index.html.twig', array());

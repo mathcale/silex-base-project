@@ -54,5 +54,10 @@ $app['twig'] = $app->extend('twig', function($twig, $app) {
     return $twig;
 });
 $app['twig.path'] = array('templates');
+$app['get_session'] = function() use($app) {
+    $session = $app['session']->get('user');
+    
+    return $session;
+};
 
 return $app;
