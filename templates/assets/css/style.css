@@ -1,0 +1,16 @@
+.text-bold {
+    font-weight: bold;
+}
+
+.body-login {
+    background-color: #f4f4f4;
+}
+
+.panel-login {
+    margin-top: 50px;
+    padding: 15px;
+}
+
+.login-logo {
+    margin-bottom: 20px;
+}

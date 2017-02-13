@@ -3,28 +3,31 @@
 {% block pageTitle %}Login{% endblock %}
 
 {% block content %}
-    <h1>Login</h1>
-    
-    {% if hasFlashMessage %}
-        <div class="alert alert-{{ msgClass }} alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {{ message }}
-        </div>
-    {% endif %}
-    
-    <p>Don't have an account? <a href="{{ path('register') }}">Sign up here!</a></p>
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default panel-login">
+            <!-- Change this placeholder with your logo -->
+            <img src="http://placehold.it/200x80?text=Your+Logo+Here" class="center-block img-responsive login-logo" />
+            
+            {% if error is not null %}
+            <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                There was an error: <span class="text-bold">{{ error }}</span>
+            </div>
+            {% endif %}
 
-    <form action="{{ path('do-login') }}" method="post">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" class="form-control" required />
+            <form action="{{ path('admin_login_check') }}" id="formLogin" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}" required />
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="_password" class="form-control" required />
+                </div>
+
+                <input type="submit" class="btn btn-success btn-block" value="Access" />
+            </form>
         </div>
-        
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" required />
-        </div>
-        
-        <button type="submit" class="btn btn-primary">Send</button>
-    </form>
+    </div>
 {% endblock %}

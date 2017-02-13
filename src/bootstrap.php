@@ -6,7 +6,9 @@ use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\RoutingServiceProvider;
 use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\SecurityServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
+use App\Provider\UserProvider;
 
 $app = new Silex\Application();
 
@@ -47,17 +49,30 @@ $app->register(new DoctrineServiceProvider(), array(
         )
     ),
 ));
+$app->register(new SecurityServiceProvider(), array(
+    'security.firewalls' => array(
+        'admin' => array(
+            'pattern' => '^/admin/',
+            'form' => array(
+                'login_path' => '/login',
+                'check_path' => '/admin/login_check'
+            ),
+            'logout' => array(
+                'logout_path' => '/admin/logout',
+                'invalidate_session' => true
+            ),
+            'users' => function() use($app) {
+                return new UserProvider($app['dbs']['main']);
+            }
+        )
+    )
+));
 
-// Configs
+// General configs
 $app['debug'] = getenv('APP_DEBUG');
 $app['twig'] = $app->extend('twig', function($twig, $app) {
     return $twig;
 });
 $app['twig.path'] = array('templates');
-$app['get_session'] = function() use($app) {
-    $session = $app['session']->get('user');
-    
-    return $session;
-};
 
 return $app;
