@@ -49,8 +49,7 @@ $console
             
             if($result) {
                 $output->writeln('<info>Done!</info>');
-                
-                $sqlTable = 'CREATE TABLE `'.$dbName.'`.`users` (`id` int(7) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, `email` varchar(50) NOT NULL, `password` varchar(15) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1';
+                $sqlTable = 'CREATE TABLE `'.$dbName.'`.`users` (`id` int(7) NOT NULL, `name` varchar(50) NOT NULL, `username` varchar(20) NOT NULL, `email` varchar(50) NOT NULL, `password` varchar(255) NOT NULL, `roles` varchar(30) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;';
                 
                 $output->write('<comment>Creating table "users"...</comment> ');
                 
@@ -58,8 +57,26 @@ $console
                 
                 if($resultTable) {
                     $output->writeln('<info>Done!</info>');
+
+                    $pass = $app['security.encoder.digest']->encodePassword('123456', '');
+                    $sqlUser = 'INSERT INTO `'.$dbName.'`.`users` VALUES (DEFAULT, \'Admin\', \'admin\', \'admin@admin.com\', \''.$pass.'\', \'ROLE_ADMIN\')';
                     
-                    $finished = true;
+                    $output->write('<comment>Creating admin user...</comment> ');
+
+                    $resultUser = $conn->query($sqlUser);
+
+                    if($resultUser) {
+                        $output->writeln('<info>Done!</info>');
+                        echo PHP_EOL;
+                        
+                        $output->writeln('<info>Your default login credentials are:</info>');
+                        $output->writeln('<comment>Username: admin</comment>');
+                        $output->writeln('<comment>Password: 123456</comment>');
+                        
+                        $finished = true;
+                    } else {
+                        throw new Exception('Could not create the user!');
+                    }
                 } else {
                     throw new Exception('Could not create the table!');
                 }
