@@ -31,6 +31,7 @@ If you already have a database, don't forget to change the SQL queries at `src/C
 
 * If you want to use npm packages, make sure to update your `.gitignore` with the `node_modules` folder
 * If you have cloned the repo, run `composer install` to download the project dependencies and then create the `.env` file by running `php -r "file_exists('.env') || copy('.env.example', '.env');"`
+* If you used `bin/console` to create your database, the default login credentials are 'admin' and '123456' (encrypted using `$app['security.encoder.digest']->encodePassword()`)
 
 ## Contributing
 
