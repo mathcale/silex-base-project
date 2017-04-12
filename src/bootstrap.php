@@ -36,14 +36,14 @@ $app->register(new DoctrineServiceProvider(), array(
     'dbs.options' => array(
         'main' => array(
             'driver'   => getenv('DB_DRIVER'),
-            'dbhost'   => getenv('DB_HOST'),
+            'host'     => getenv('DB_HOST'),
             'dbname'   => getenv('DB_NAME'),
             'user'     => getenv('DB_USER'),
             'password' => getenv('DB_PASSWORD'),
         ),
         'console' => array(
             'driver'   => getenv('DB_DRIVER'),
-            'dbhost'   => getenv('DB_HOST'),
+            'host'     => getenv('DB_HOST'),
             'user'     => getenv('DB_USER'),
             'password' => getenv('DB_PASSWORD'),
         )
